@@ -1,0 +1,79 @@
+version: 2
+
+models:
+  - name: stg_311
+    description: "Cleaned staging model for NYC 311 data, fixing data types and filtering invalid rows."
+
+    columns:
+      - name: created_ts
+        description: "Timestamp when the 311 complaint was created."
+        tests:
+          - not_null
+
+      - name: closed_ts
+        description: "Timestamp when the 311 complaint was closed."
+        tests:
+          - not_null
+
+      - name: complaint_type
+        description: "Category of 311 complaint (Noise, Illegal Parking, etc.)."
+        tests:
+          - not_null
+
+      - name: incident_zip
+        description: "ZIP code of the incident."
+        tests:
+          - not_null
+
+      - name: latitude
+        description: "Latitude coordinate of complaint location."
+
+      - name: longitude
+        description: "Longitude coordinate of complaint location."
+
+  - name: fct_311
+    description: "Row-level fact table containing NYC 311 complaints enriched with engineered features including case duration, response speed, weekend indicator, and hour of day."
+
+    columns:
+      - name: created_ts
+        description: "Timestamp when the complaint was created."
+        tests:
+          - not_null
+
+      - name: closed_ts
+        description: "Timestamp when the complaint was closed."
+        tests:
+          - not_null
+
+      - name: complaint_type
+        description: "High-level complaint category."
+        tests:
+          - not_null
+
+      - name: incident_zip
+        description: "ZIP code where the incident occurred."
+        tests:
+          - not_null
+
+      - name: case_duration_hours
+        description: "Hours between created_ts and closed_ts."
+        tests:
+          - not_null
+
+      - name: is_weekend
+        description: "Whether the complaint was made on a weekend."
+        tests:
+          - accepted_values:
+              values: ["Weekend", "Weekday"]
+
+      - name: hour_of_day
+        description: "Hour of the day (0–23) when the complaint was submitted."
+        tests:
+          - accepted_values:
+              values: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+
+      - name: response_speed_category
+        description: "Categorized response time: Fast (≤2h), Medium (≤12h), Slow (>12h)."
+        tests:
+          - accepted_values:
+              values: ["Fast", "Medium", "Slow"]

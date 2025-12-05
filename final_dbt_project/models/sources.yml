@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: kangaroo_final
+    database: MLDS430
+    schema: KANGAROO_FINAL
+    tables:
+      - name: raw_311

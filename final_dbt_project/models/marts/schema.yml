@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: fct_311
+    description: "311 complaint fact table with engineered features"
+    columns:
+      - name: created_ts
+        tests: [not_null]
+
+      - name: closed_ts
+        tests: [not_null]
+
+      - name: case_duration_hours
+        tests: [not_null]
