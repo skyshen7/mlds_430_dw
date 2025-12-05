@@ -132,12 +132,6 @@ mlds_430_dw/
 4. **Geographic Map:** Spatial distribution across Manhattan
 5. **Interactive Filters:** Filter by complaint type, time, location
 
-**Dashboard Preview:**
-
-![NYC 311 Dashboard](Analytics:Visualizatiton/dashboard_screenshot.png)
-
----
-
 ## How to Run This Project
 
 ### Prerequisites:
